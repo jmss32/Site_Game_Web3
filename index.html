@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArmoryCoin (ARMY)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background: #444;
+      color: #fff;
+      padding: 20px 0;
+    }
+    section {
+      margin: 20px;
+      padding: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ArmoryCoin (ARMY)</h1>
+    <p>A moeda lendária do universo Web3</p>
+  </header>
+  <section>
+    <h2>O que é ArmoryCoin?</h2>
+    <p>Um token projetado para compras de armas e armaduras em jogos Web3. Faça parte dessa revolução!</p>
+    <button onclick="connectWallet()">Conectar Carteira</button>
+  </section>
+  <footer>
+    <p>&copy; 2024 ArmoryCoin - Todos os direitos reservados</p>
+  </footer>
+  <script>
+    async function connectWallet() {
+      // Verifica se o MetaMask está instalado
+      if (window.ethereum) {
+        try {
+          // Solicita a conexão com a carteira
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          
+          // Exibe o endereço da carteira conectada
+          alert('Carteira conectada: ' + accounts[0]);
+          
+          // Verifica a rede em que o usuário está conectado
+          const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+          
+          // Exemplo: Verifica se o usuário está na rede Ethereum (mainnet) ou Polygon (137)
+          if (chainId === '0x1') {
+            alert('Você está conectado à rede Ethereum!');
+          } else if (chainId === '0x89') {
+            alert('Você está conectado à rede Polygon!');
+          } else {
+            alert('Você está conectado a uma rede não suportada. Por favor, mude para a Ethereum ou Polygon.');
+          }
+
+        } catch (error) {
+          // Exibe erro caso falhe na conexão
+          console.error(error);
+          alert('Erro ao conectar a carteira. Verifique se o MetaMask está desbloqueado.');
+        }
+      } else {
+        // Caso o MetaMask não esteja instalado
+        alert('MetaMask não encontrada. Instale-a para continuar.');
+      }
+    }
+  </script>
+</body>
+</html>
